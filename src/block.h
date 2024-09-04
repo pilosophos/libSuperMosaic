@@ -7,25 +7,17 @@
 #define LSM_BLOCK_H
 
 /**
- * @brief Possible origins for blocks.
+ * @brief Possible block types. Used for coloring blocks.
  */
 typedef enum {
-    OTHER,
-    I,
-    O,
-    T,
-    L,
-    J,
-    S,
-    Z
-} blockOrigin;
-
-/**
- * @brief A single block.
- */
-typedef struct block {
-    /** Origin on this block. May be used by front-ends for block coloring. */
-    blockOrigin blockOrigin;
+    BLOCK_OTHER,
+    BLOCK_I,
+    BLOCK_O,
+    BLOCK_T,
+    BLOCK_L,
+    BLOCK_J,
+    BLOCK_S,
+    BLOCK_Z
 } block;
 
 #endif
