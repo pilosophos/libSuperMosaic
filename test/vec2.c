@@ -14,8 +14,8 @@ int main() {
 }
 
 int add() {
-    vec2 vecA = newVec2(1, 2);
-    vec2 vecB = newVec2(3, 4);
+    vec2 vecA = {x: 1, y: 2};
+    vec2 vecB = {x: 3, y: 4};
 
     vec2Add(&vecA, &vecB);
 

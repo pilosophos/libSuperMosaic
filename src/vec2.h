@@ -1,12 +1,17 @@
+/**
+ * @file vec2.h
+ * @brief An (x,y) vector and vector functions
+ */
 #ifndef LSM_VEC2_H
 #define LSM_VEC2_H
 
+/**
+ * @brief An (x,y) vector
+ */
 typedef struct vec2 {
     int x;
     int y;
 } vec2;
-
-vec2 newVec2(int x, int y);
 
 /**
  * @brief Given A, add B to it. This is an in-place operation.
