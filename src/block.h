@@ -9,7 +9,7 @@
 /**
  * @brief Possible origins for blocks.
  */
-typedef enum {
+typedef enum blockOrigin {
     OTHER,
     I,
     O,
