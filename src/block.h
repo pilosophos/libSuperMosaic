@@ -9,7 +9,7 @@
 /**
  * @brief Possible origins for blocks.
  */
-typedef enum blockOrigin {
+typedef enum {
     OTHER,
     I,
     O,
@@ -23,9 +23,9 @@ typedef enum blockOrigin {
 /**
  * @brief A single block.
  */
-struct block {
+typedef struct block {
     /** Origin on this block. May be used by front-ends for block coloring. */
     blockOrigin blockOrigin;
-};
+} block;
 
 #endif
