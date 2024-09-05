@@ -10,14 +10,14 @@
  * @brief Possible block types. Used for coloring blocks.
  */
 typedef enum {
-    BLOCK_OTHER,
     BLOCK_I,
     BLOCK_O,
     BLOCK_T,
     BLOCK_L,
     BLOCK_J,
     BLOCK_S,
-    BLOCK_Z
+    BLOCK_Z,
+    BLOCK_OTHER
 } block;
 
 #endif
