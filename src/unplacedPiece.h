@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "vec2.h"
 #include "block.h"
 
@@ -12,7 +13,13 @@ typedef enum {
     SHAPE_J,
     SHAPE_S,
     SHAPE_Z
-} pieceShape;
+} basicShape;
+
+/**
+ * @brief Bitwise-encoded position of a piece's blocks on a 4x4 grid.
+ * (See: https://stackoverflow.com/a/38596291)
+ */
+typedef int16_t shapeBits;
 
 /**
  * @brief An unplaced piece, including those in the piece queue.
@@ -20,19 +27,23 @@ typedef enum {
 typedef struct unplacedPiece {
     /** Global top left XY */
     vec2* topLeftXY;
-    /** XYs of the four tetromino blocks, relative to the piece's top left corner */
-    vec2 blockRelativeXYs[4];
 
-    /** The block that this piece is made of */
-    block block;
+    /** This piece's basic Tetromino shape */
+    basicShape basicShape;
 
-    /** private */
-    unsigned char width;
-    unsigned char height;
+    /** This piece's rotation (number of times rotated) */
+    unsigned char rotation;
 } unplacedPiece;
 
-unplacedPiece newUnplacedPiece(pieceShape shape, vec2* topLeftXY);
-void rotatePiece(unplacedPiece* piece, int times);
-void translatePiece(unplacedPiece* piece, vec2 amount);
+void rotatePiece(unplacedPiece* piece, unsigned char times);
+void translatePiece(unplacedPiece* piece, vec2* amount);
+
+/**
+ * @brief Get the bits representing where this piece's blocks are
+ * 
+ * @param piece Piece to get block bits of
+ * @return shapeBits Block bits
+ */
+shapeBits getPieceBlockBits(unplacedPiece* piece);
 
 #endif
