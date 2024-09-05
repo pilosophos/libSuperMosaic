@@ -11,13 +11,13 @@
  * @brief Possible user actions, such as drops, clearing single lines, etc.
  */
 typedef enum {
-    SOFT_DROP,
-    DROP,
-    SINGLE,
-    DOUBLE,
-    TRIPLE,
-    QUAD,
-    MOSAIC
+    ACTION_SOFT_DROP,
+    ACTION_HARD_DROP,
+    ACTION_SINGLE,
+    ACTION_DOUBLE,
+    ACTION_TRIPLE,
+    ACTION_QUAD,
+    ACTION_MOSAIC
 } action;
 
 #endif
