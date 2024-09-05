@@ -1,6 +1,7 @@
 /**
  * @file action.h
- * @brief Defines the action enum.
+ * @brief Defines the action enum representing user actions like drops and line
+ * clears.
  */
 
 #ifndef LSM_ACTION_H
