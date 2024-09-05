@@ -33,12 +33,16 @@ typedef struct ruleset {
     int (*getDropTimeout)(int /* level */);
 
     /**
-     * Get the score of an action, based on level, the current simple clear
-     * chain, and the current difficult clear chain
+     * Get the score of an action, based on:
+     *  - level: Current level
+     *  - timeLeft: Number of ticks before a forced drop (0 if the action is a soft drop)
+     *  - chain: Current simple clear chain
+     *  - difficultChain: Current difficult clear chain
      */
     int (*scoreAction)(
         action,
         int /* level */,
+        int /* timeLeft */,
         int /* chain */,
         int /* difficultChain */
     );
