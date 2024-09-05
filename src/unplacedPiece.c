@@ -2,8 +2,8 @@
 
 /**
  * @brief List of shapeBits for all rotations of each basic Tetromino shape
- * 
- * Ex: `shapeHexes[SHAPE_S][2]` gets the S Tetromino rotated twice.
+ * These are in the same order as the `basicShape` enum, so
+ * `shapeHexes[SHAPE_S][2]` gets the S Tetromino rotated twice.
  */
 shapeBits shapeHexes[8][4] = {
   { 0x0F00, 0x4444, 0x0F00, 0x4444 }, // I
@@ -23,6 +23,9 @@ void translatePiece(unplacedPiece* piece, vec2* amount) {
     vec2Add(piece->topLeftXY, amount);
 }
 
-shapeBits getPieceBlockBits(unplacedPiece* piece) {
-    return shapeHexes[piece->basicShape][piece->rotation];
+int xyHasBlock(unplacedPiece* piece, int y, int x) {
+    shapeBits shapeBits = shapeHexes[piece->basicShape][piece->rotation];
+
+    int mask = 0x8000 >> ((y * 4) + x);
+    return shapeBits & mask;
 }

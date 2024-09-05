@@ -38,12 +38,6 @@ typedef struct unplacedPiece {
 void rotatePiece(unplacedPiece* piece, int times);
 void translatePiece(unplacedPiece* piece, vec2* amount);
 
-/**
- * @brief Get the bits representing where this piece's blocks are
- * 
- * @param piece Piece to get block bits of
- * @return shapeBits Block bits
- */
-shapeBits getPieceBlockBits(unplacedPiece* piece);
+int xyHasBlock(unplacedPiece* piece, int y, int x);
 
 #endif
