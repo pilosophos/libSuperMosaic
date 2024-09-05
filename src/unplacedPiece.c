@@ -16,7 +16,7 @@ shapeBits shapeHexes[8][4] = {
 };
 
 void rotatePiece(unplacedPiece* piece, int times) {
-    piece->rotation = piece->rotation + times % 4;
+    piece->rotation = (piece->rotation + times) % 4;
 }
 
 void translatePiece(unplacedPiece* piece, vec2* amount) {
