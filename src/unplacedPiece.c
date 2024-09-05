@@ -15,7 +15,7 @@ shapeBits shapeHexes[8][4] = {
   { 0x4C80, 0xC600, 0x4C80, 0xC600 }, // Z
 };
 
-void rotatePiece(unplacedPiece* piece, unsigned char times) {
+void rotatePiece(unplacedPiece* piece, int times) {
     piece->rotation = piece->rotation + times % 4;
 }
 

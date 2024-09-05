@@ -9,8 +9,8 @@
  * @brief An (x,y) vector
  */
 typedef struct vec2 {
-    signed char x;
-    signed char y;
+    int x;
+    int y;
 } vec2;
 
 /**

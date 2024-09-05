@@ -32,10 +32,10 @@ typedef struct unplacedPiece {
     basicShape basicShape;
 
     /** This piece's rotation (number of times rotated) */
-    unsigned char rotation;
+    int rotation;
 } unplacedPiece;
 
-void rotatePiece(unplacedPiece* piece, unsigned char times);
+void rotatePiece(unplacedPiece* piece, int times);
 void translatePiece(unplacedPiece* piece, vec2* amount);
 
 /**
