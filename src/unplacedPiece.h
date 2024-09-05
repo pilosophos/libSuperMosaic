@@ -14,8 +14,6 @@ typedef enum {
     SHAPE_Z
 } pieceShape;
 
-typedef unplacedPiecePrivate;
-
 /**
  * @brief An unplaced piece, including those in the piece queue.
  */
@@ -29,8 +27,8 @@ typedef struct unplacedPiece {
     block block;
 
     /** private */
-    int width;
-    int height;
+    unsigned char width;
+    unsigned char height;
 } unplacedPiece;
 
 unplacedPiece newUnplacedPiece(pieceShape shape, vec2* topLeftXY);
