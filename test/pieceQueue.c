@@ -22,6 +22,7 @@ int queueGeneratesRandomBag() {
         }
     }
 
+    destroyPieceQueue(queue);
     return 0;
 }
 
