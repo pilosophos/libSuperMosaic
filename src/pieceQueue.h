@@ -10,7 +10,7 @@
  * In the future, I might make this configurable by the front-end, to support
  * one of every <tetromino, rotation> combo.
  */
-const int PIECE_QUEUE_LENGTH = 7;
+const int PIECE_SUBQUEUE_LENGTH = 7;
 
 /**
  * Unplaced pieces in the NEXT queue.
@@ -41,6 +41,9 @@ typedef struct pieceQueue {
      */
     unplacedPiece** backQueue;
 } pieceQueue;
+
+pieceQueue* newPieceQueue();
+void destroyPieceQueue(pieceQueue* queue);
 
 unplacedPiece* popPieceQueue(pieceQueue* queue);
 
