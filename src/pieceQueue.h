@@ -12,6 +12,15 @@
  */
 const int PIECE_QUEUE_LENGTH = 7;
 
+/**
+ * Unplaced pieces in the NEXT queue.
+ * 
+ * The queue is double buffered (that is,
+ * it has both forward and back sub-queues) in order to allow the front-end
+ * to always preview at least 7 tetrominos ahead while still using the
+ * random-bag selection strategy, where every 7 tetrominos generated contain
+ * one of each tetromino shape.
+ */
 typedef struct pieceQueue {
     /** The index of the front of the queue */
     int currentIndex;
