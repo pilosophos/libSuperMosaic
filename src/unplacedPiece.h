@@ -32,7 +32,7 @@ typedef int16_t shapeBits;
  */
 typedef struct unplacedPiece {
     /** Global top left XY */
-    vec2* topLeftXY;
+    vec2 topLeftXY;
 
     /** This piece's basic Tetromino shape */
     basicShape basicShape;
@@ -41,8 +41,11 @@ typedef struct unplacedPiece {
     int rotation;
 } unplacedPiece;
 
+unplacedPiece* newPiece(vec2 topLeftXY, basicShape basicShape, int rotation);
+void destroyPiece(unplacedPiece* piece);
+
 void rotatePiece(unplacedPiece* piece, int times);
-void translatePiece(unplacedPiece* piece, vec2* amount);
+void translatePiece(unplacedPiece* piece, vec2 amount);
 
 /**
  * @brief Determine if the (x, y) of this piece contains a block. Relative to

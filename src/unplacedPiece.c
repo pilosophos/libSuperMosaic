@@ -1,4 +1,18 @@
+#include <stdlib.h>
 #include "unplacedPiece.h"
+
+unplacedPiece* newPiece(vec2 topLeftXY, basicShape basicShape, int rotation) {
+    unplacedPiece* newPiece = malloc(sizeof(unplacedPiece));
+    newPiece->topLeftXY = topLeftXY;
+    newPiece->basicShape = basicShape;
+    newPiece->rotation = rotation;
+
+    return newPiece;
+}
+
+void destroyPiece(unplacedPiece* piece) {
+    free(piece);
+}
 
 /**
  * @brief List of shapeBits for all rotations of each basic Tetromino shape
@@ -19,8 +33,8 @@ void rotatePiece(unplacedPiece* piece, int times) {
     piece->rotation = (piece->rotation + times) % 4;
 }
 
-void translatePiece(unplacedPiece* piece, vec2* amount) {
-    vec2Add(piece->topLeftXY, amount);
+void translatePiece(unplacedPiece* piece, vec2 amount) {
+    vec2Add(&piece->topLeftXY, &amount);
 }
 
 int xyHasBlock(unplacedPiece* piece, int y, int x) {
