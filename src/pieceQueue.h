@@ -10,7 +10,7 @@
  * In the future, I might make this configurable by the front-end, to support
  * one of every <tetromino, rotation> combo.
  */
-const PIECE_QUEUE_LENGTH = 7;
+const int PIECE_QUEUE_LENGTH = 7;
 
 typedef struct pieceQueue {
     /** The index of the front of the queue */
