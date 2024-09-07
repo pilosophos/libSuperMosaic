@@ -1,6 +1,6 @@
 #include "pieceQueue.h"
 
-void swapQueues(pieceQueue* queue) {
+void swapSubQueues(pieceQueue* queue) {
     unplacedPiece** temp = queue->forwardQueue;
     queue->forwardQueue = queue->backQueue;
     queue->backQueue = temp;
@@ -8,7 +8,7 @@ void swapQueues(pieceQueue* queue) {
     queue->currentIndex = 0;
 }
 
-void refreshSubQueue(unplacedPiece** queue) {
+void refreshSubQueue(unplacedPiece** subQueue) {
     for (int i = 0; i < PIECE_QUEUE_LENGTH; i++) {
         // TODO: implement me
     }
@@ -19,7 +19,7 @@ unplacedPiece* popPieceQueue(pieceQueue* queue) {
 
     queue->currentIndex++;
     if (queue->currentIndex > PIECE_QUEUE_LENGTH) {
-        swapQueues(queue);
+        swapSubQueues(queue);
         refreshSubQueue(queue->forwardQueue);
     }
 
