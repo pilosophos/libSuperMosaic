@@ -69,7 +69,7 @@ unplacedPiece* popPieceQueue(pieceQueue* queue) {
     unplacedPiece* front = queue->forwardQueue[queue->currentIndex];
 
     queue->currentIndex++;
-    if (queue->currentIndex > PIECE_SUBQUEUE_LENGTH) {
+    if (queue->currentIndex >= PIECE_SUBQUEUE_LENGTH) {
         swapSubQueues(queue);
         refreshSubQueue(queue->forwardQueue);
     }
