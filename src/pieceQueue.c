@@ -9,7 +9,7 @@ void swapSubQueues(pieceQueue* queue) {
     queue->currentIndex = 0;
 }
 
-void shuffle(int *array, size_t n)
+void shuffle(basicShape* array, size_t n)
 {
     if (n > 1) 
     {
@@ -17,7 +17,7 @@ void shuffle(int *array, size_t n)
         for (i = 0; i < n - 1; i++) 
         {
           size_t j = i + rand() / (RAND_MAX / (n - i) + 1);
-          int t = array[j];
+          basicShape t = array[j];
           array[j] = array[i];
           array[i] = t;
         }
@@ -25,7 +25,7 @@ void shuffle(int *array, size_t n)
 }
 
 void refreshSubQueue(unplacedPiece** subQueue) {
-    basicShape* possibleShapes[PIECE_SUBQUEUE_LENGTH] = {
+    basicShape possibleShapes[PIECE_SUBQUEUE_LENGTH] = {
         SHAPE_I,
         SHAPE_O,
         SHAPE_T,
@@ -47,12 +47,14 @@ pieceQueue* newPieceQueue() {
     newQueue->currentIndex = 0;
 
     // init front queue
-    unplacedPiece* forwardQueue = malloc(sizeof(unplacedPiece) * PIECE_SUBQUEUE_LENGTH);
-    newQueue->forwardQueue = &forwardQueue;
+    unplacedPiece** forwardQueue = malloc(sizeof(unplacedPiece*) * PIECE_SUBQUEUE_LENGTH);
+    newQueue->forwardQueue = forwardQueue;
+    refreshSubQueue(forwardQueue);
 
     // init back queue
-    unplacedPiece* backQueue = malloc(sizeof(unplacedPiece) * PIECE_SUBQUEUE_LENGTH);
-    newQueue->backQueue = &backQueue;
+    unplacedPiece** backQueue = malloc(sizeof(unplacedPiece*) * PIECE_SUBQUEUE_LENGTH);
+    newQueue->backQueue = backQueue;
+    refreshSubQueue(backQueue);
 
     return newQueue;
 }

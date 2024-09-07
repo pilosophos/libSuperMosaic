@@ -10,7 +10,8 @@
  * In the future, I might make this configurable by the front-end, to support
  * one of every <tetromino, rotation> combo.
  */
-const int PIECE_SUBQUEUE_LENGTH = 7;
+#define PIECE_SUBQUEUE_LENGTH 7
+
 
 /**
  * Unplaced pieces in the NEXT queue.
