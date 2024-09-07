@@ -18,6 +18,7 @@ typedef struct game {
     block** placedBlocks;
     pieceQueue pieceQueue;
     unplacedPiece hoveringPiece;
+    unplacedPiece heldPiece;
     vec2 cursor;
 } game;
 
