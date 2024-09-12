@@ -26,6 +26,6 @@ game* newGame(ruleset* ruleset);
 void destroyGame(game* game);
 
 action tickGame(game* game);
-action handleGameInput(game* game, input input)
+action handleGameInput(game* game, input input);
 
 #endif
