@@ -43,31 +43,7 @@ action tickGame(game* game) {
         }
 
         int clearedLines = clearFullLines(game);
-        action action = ACTION_SOFT_DROP;
-        switch (clearedLines) {
-            case 1: action = ACTION_SINGLE; break;
-            case 2: action = ACTION_DOUBLE; break;
-            case 3: action = ACTION_TRIPLE; break;
-            case 4: action = ACTION_QUAD; break;
-            case 5: action = ACTION_MOSAIC; break;
-        }
-
-        if (clearedLines > 0) {
-            game->chain++;
-        }
-
-        if (clearedLines >= 4) {
-            game->difficultChain++;
-        }
-
-        game->linesCleared += clearedLines;
-        game->totalScore += game->ruleset->scoreAction(
-            action,
-            game->ruleset->getLevel(game->linesCleared),
-            game->forcedDropTimeoutTicks,
-            game->chain,
-            game->difficultChain
-        );
+        updateGameStatistics(game, clearedLines, ACTION_SOFT_DROP);
     }
 
     return ACTION_NONE;
@@ -80,6 +56,38 @@ action handleGameInput(game* game, input input) {
     }
 
     // TODO: implement me
+}
+
+void updateGameStatistics(game* game, int clearedLines, action defaultAction) {
+    action action = defaultAction;
+    switch (clearedLines) {
+        case 1: action = ACTION_SINGLE; break;
+        case 2: action = ACTION_DOUBLE; break;
+        case 3: action = ACTION_TRIPLE; break;
+        case 4: action = ACTION_QUAD; break;
+        case 5: action = ACTION_MOSAIC; break;
+    }
+
+    // update normal and difficult chains
+    if (clearedLines == 0) {
+        game->chain = 0;
+        game->difficultChain = 0;
+    } else {
+        game->chain++;
+        if (clearedLines >= 4) {
+           game->difficultChain++;
+        }
+    }
+
+    // update linesCleared and totalScore
+    game->linesCleared += clearedLines;
+    game->totalScore += game->ruleset->scoreAction(
+        action,
+        game->ruleset->getLevel(game->linesCleared),
+        game->forcedDropTimeoutTicks,
+        game->chain,
+        game->difficultChain
+    );
 }
 
 /**
