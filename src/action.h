@@ -1,6 +1,6 @@
 /**
  * @file action.h
- * @brief Defines the action enum representing user actions like drops and line
+ * @brief Defines the action enum representing game actions like drops and line
  * clears.
  */
 
@@ -8,11 +8,12 @@
 #define LSM_ACTION_H
 
 /**
- * @brief Possible user actions, such as drops, clearing single lines, etc.
+ * @brief Possible game actions, such as drops, clearing single lines, etc.
  */
 typedef enum {
     ACTION_NONE,
     ACTION_GAME_OVER,
+    ACTION_MOVE,
     ACTION_SOFT_DROP,
     ACTION_HARD_DROP,
     ACTION_SINGLE,
