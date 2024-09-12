@@ -152,7 +152,9 @@ action handleGameInput(game* game, input input) {
 
     if (input == INPUT_UP) {
         vec2 delta = {x: 0, y: 1};
-        vec2Add(game->hoveringPiece->topLeftXY, delta);
+        vec2 destination = vec2Add(game->hoveringPiece->topLeftXY, delta);
+        // TODO: Check that, at the new destination, the piece isn't beyond the board boundaries
+        // probably using a helper function or something
         return ACTION_MOVE;
     }
 
