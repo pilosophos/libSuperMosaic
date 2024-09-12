@@ -16,9 +16,9 @@ typedef struct game {
 
     int forcedDropTimeoutTicks;
     block** placedBlocks;
-    pieceQueue pieceQueue;
-    unplacedPiece hoveringPiece;
-    unplacedPiece heldPiece;
+    pieceQueue* pieceQueue;
+    unplacedPiece* hoveringPiece;
+    unplacedPiece* heldPiece;
     vec2 cursor;
 } game;
 
