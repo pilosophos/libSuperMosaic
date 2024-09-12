@@ -20,6 +20,7 @@ int scoreActionClassic(action action, int level, int timeLeft, int chain, int di
 extern ruleset classicRuleset = {
     height: 20,
     width: 10,
+    isHoldAllowed: 0,
     dynamicCursor: 0,
     getLevel: &getLevelClassic,
     getDropTimeout: &getDropTimeoutClassic,
