@@ -17,7 +17,7 @@ game* newGame(ruleset* ruleset) {
     game->pieceQueue = newPieceQueue();
     game->hoveringPiece = popPieceQueue(game->pieceQueue);
 
-    vec2 cursor = {x: 0, y: 0};
+    vec2 cursor = {x: game->ruleset->width / 2, y: game->ruleset->height / 2};
     game->cursor = cursor;
 
     game->isHoldUsed = 0;
