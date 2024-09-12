@@ -20,7 +20,7 @@ typedef struct game {
     unplacedPiece* hoveringPiece;
     vec2 cursor;
 
-    int canHold;
+    int isHoldUsed;
     unplacedPiece* heldPiece;
 } game;
 

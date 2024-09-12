@@ -23,6 +23,9 @@ typedef struct ruleset {
     /** Board width */
     int width;
 
+    /** 1/true if the player is allowed to hold pieces */
+    int isHoldAllowed;
+
     /** 1/true if the next piece should appear where the last piece dropped */
     int dynamicCursor;
 

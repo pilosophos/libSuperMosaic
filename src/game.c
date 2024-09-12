@@ -20,7 +20,7 @@ game* newGame(ruleset* ruleset) {
     vec2 cursor = {x: 0, y: 0};
     game->cursor = cursor;
 
-    game->canHold = 1;
+    game->isHoldUsed = 0;
     game->heldPiece = NULL;
 
     return game;
@@ -46,7 +46,6 @@ action tickGame(game* game) {
 
         int clearedLines = clearFullLines(game);
         action action = updateGameStatistics(game, clearedLines, ACTION_SOFT_DROP);
-        
         game->hoveringPiece = popPieceQueue(game->pieceQueue);
         return action;
     }
@@ -55,8 +54,34 @@ action tickGame(game* game) {
 }
 
 action handleGameInput(game* game, input input) {
-    int isPlaceOk = placePiece(game);
-    if (!isPlaceOk) {
+    if (input == INPUT_HARD_DROP) {
+        int isPlaceOk = placePiece(game);
+        if (!isPlaceOk) {
+            return ACTION_NONE;
+        }
+
+        int clearedLines = clearFullLines(game);
+        action action = updateGameStatistics(game, clearedLines, ACTION_HARD_DROP);
+        game->hoveringPiece = popPieceQueue(game->pieceQueue);
+        return action;
+    }
+
+    if (input == INPUT_HOLD) {
+        if (game->ruleset->isHoldAllowed && !game->isHoldUsed) {
+            int level = game->ruleset->getLevel(game->linesCleared);
+            game->forcedDropTimeoutTicks = game->ruleset->getDropTimeout(level);
+
+            if (game->heldPiece) {
+                unplacedPiece* temp = game->heldPiece;
+                game->heldPiece = game->hoveringPiece;
+                game->heldPiece = temp;
+            } else {
+                game->heldPiece = game->hoveringPiece;
+                game->hoveringPiece = popPieceQueue(game->pieceQueue);
+            }
+
+            game->isHoldUsed = 0;
+        }
         return ACTION_NONE;
     }
 

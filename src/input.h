@@ -6,7 +6,8 @@ typedef enum {
     INPUT_DOWN,
     INPUT_LEFT,
     INPUT_RIGHT,
-    INPUT_HARD_DROP
+    INPUT_HARD_DROP,
+    INPUT_HOLD
 } input;
 
 #endif
