@@ -16,10 +16,12 @@ game* newGame(ruleset* ruleset) {
     game->placedBlocks = malloc(sizeof(block) * ruleset->height * ruleset->width);
     game->pieceQueue = newPieceQueue();
     game->hoveringPiece = popPieceQueue(game->pieceQueue);
-    game->heldPiece = NULL;
 
     vec2 cursor = {x: 0, y: 0};
     game->cursor = cursor;
+
+    game->canHold = 1;
+    game->heldPiece = NULL;
 
     return game;
 }
@@ -43,7 +45,10 @@ action tickGame(game* game) {
         }
 
         int clearedLines = clearFullLines(game);
-        updateGameStatistics(game, clearedLines, ACTION_SOFT_DROP);
+        action action = updateGameStatistics(game, clearedLines, ACTION_SOFT_DROP);
+        
+        game->hoveringPiece = popPieceQueue(game->pieceQueue);
+        return action;
     }
 
     return ACTION_NONE;
@@ -58,8 +63,16 @@ action handleGameInput(game* game, input input) {
     // TODO: implement me
 }
 
-void updateGameStatistics(game* game, int clearedLines, action defaultAction) {
-    action action = defaultAction;
+/**
+ * @brief Updates the game statistics based on the number of cleared lines
+ * 
+ * @param game The game to update
+ * @param clearedLines The number of lines cleared by the drop
+ * @param dropAction ACTION_SOFT_DROP or ACTION_HARD_DROP, depending on what caused this to run
+ * @return Same as dropAction if no lines cleared, otherwise the appropriate line clear action
+ */
+action updateGameStatistics(game* game, int clearedLines, action dropAction) {
+    action action = dropAction;
     switch (clearedLines) {
         case 1: action = ACTION_SINGLE; break;
         case 2: action = ACTION_DOUBLE; break;
@@ -88,6 +101,8 @@ void updateGameStatistics(game* game, int clearedLines, action defaultAction) {
         game->chain,
         game->difficultChain
     );
+
+    return action;
 }
 
 /**
