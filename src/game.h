@@ -6,7 +6,7 @@
 #define LSM_GAME_H
 
 typedef struct game {
-    ruleset ruleset;
+    ruleset* ruleset;
 
     int isGameOver;
     int linesCleared;
