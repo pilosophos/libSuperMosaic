@@ -11,6 +11,8 @@
  * @brief Possible user actions, such as drops, clearing single lines, etc.
  */
 typedef enum {
+    ACTION_NONE,
+    ACTION_GAME_OVER,
     ACTION_SOFT_DROP,
     ACTION_HARD_DROP,
     ACTION_SINGLE,
