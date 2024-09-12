@@ -14,11 +14,12 @@ typedef struct vec2 {
 } vec2;
 
 /**
- * @brief Given A, add B to it. This is an in-place operation.
+ * @brief Add A to B and return the sum
  * 
- * @param a Vector to add to
- * @param b Vector to add
+ * @param a First vector
+ * @param b Second vector
+ * @return Vector sum
  */
-void vec2Add(vec2* a, vec2* b);
+vec2 vec2Add(vec2 a, vec2 b);
 
 #endif

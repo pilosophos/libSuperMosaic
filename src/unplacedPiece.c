@@ -34,7 +34,7 @@ void rotatePiece(unplacedPiece* piece, int times) {
 }
 
 void translatePiece(unplacedPiece* piece, vec2 amount) {
-    vec2Add(&piece->topLeftXY, &amount);
+    piece->topLeftXY = vec2Add(piece->topLeftXY, amount);
 }
 
 int xyHasBlock(unplacedPiece* piece, int y, int x) {
