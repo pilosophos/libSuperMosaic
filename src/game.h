@@ -14,13 +14,20 @@ typedef struct game {
     int chain;
     int difficultChain;
 
+    /** Time until the game forces a soft drop, in ticks */
     int forcedDropTimeoutTicks;
+    /** Board of placed blocks. (0,0) is at the top left corner. */
     block** placedBlocks;
+    /** Queue of upcoming pieces */
     pieceQueue* pieceQueue;
+    /** The currently hovering piece */
     unplacedPiece* hoveringPiece;
+    /** Where the next piece should spawn in */
     vec2 cursor;
 
+    /** 1/true if the user used up their hold */
     int isHoldUsed;
+    /** The currently held piece, or NULL if none is held */
     unplacedPiece* heldPiece;
 } game;
 
