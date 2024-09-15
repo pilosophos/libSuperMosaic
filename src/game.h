@@ -17,7 +17,7 @@ typedef struct game {
     /** Time until the game forces a soft drop, in ticks */
     int forcedDropTimeoutTicks;
     /** Board of placed blocks. (0,0) is at the top left corner. */
-    block** placedBlocks;
+    block* placedBlocks;
     /** Queue of upcoming pieces */
     pieceQueue* pieceQueue;
     /** The currently hovering piece */

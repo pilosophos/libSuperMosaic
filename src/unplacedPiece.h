@@ -52,10 +52,10 @@ void translatePiece(unplacedPiece* piece, vec2 amount);
  * the piece's top left corner.
  * 
  * @param piece Piece to check
- * @param y Piece-relative y
  * @param x Piece-relative x
+ * @param y Piece-relative y
  * @return int 1 if there is a block there
  */
-int xyHasBlock(unplacedPiece* piece, int y, int x);
+int xyHasBlock(unplacedPiece* piece, int x, int y);
 
 #endif

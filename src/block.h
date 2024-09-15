@@ -12,6 +12,7 @@
  * @note IF YOU CHANGE THE ORDER OF THE BLOCKS you also need to change `unplacedPiece.c#shapeHexes`
  */
 typedef enum {
+    BLOCK_NONE,
     BLOCK_I,
     BLOCK_O,
     BLOCK_T,

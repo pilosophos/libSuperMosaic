@@ -20,6 +20,7 @@ void destroyPiece(unplacedPiece* piece) {
  * `shapeHexes[SHAPE_S][2]` gets the S Tetromino rotated twice.
  */
 shapeBits shapeHexes[8][4] = {
+  { 0x0000, 0x0000, 0x0000, 0x0000 }, // NONE
   { 0x0F00, 0x4444, 0x0F00, 0x4444 }, // I
   { 0xCC00, 0xCC00, 0xCC00, 0xCC00 }, // O
   { 0x0E40, 0x4C40, 0x4E00, 0x4640 }, // T
@@ -37,7 +38,7 @@ void translatePiece(unplacedPiece* piece, vec2 amount) {
     piece->topLeftXY = vec2Add(piece->topLeftXY, amount);
 }
 
-int xyHasBlock(unplacedPiece* piece, int y, int x) {
+int xyHasBlock(unplacedPiece* piece, int x, int y) {
     shapeBits shapeBits = shapeHexes[piece->basicShape][piece->rotation];
 
     int mask = 0x8000 >> ((y * 4) + x);

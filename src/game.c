@@ -34,15 +34,40 @@ void destroyGame(game* game) {
     free(game);
 }
 
+block getBlockAt(block* board, int boardWidth, int boardHeight, int x, int y) {
+    return board[(y * boardWidth) + (sizeof(block) * x)];
+}
+
+block setBlockAt(block* board, int boardWidth, int boardHeight, int x, int y, block newBlock) {
+    board[(y * boardWidth) + (sizeof(block) * x)] = newBlock;
+}
+
 /**
  * @brief Try placing the active piece on the board.
  * 
- * @param game Game to update
+ * @param board Board to place on
+ * @param piece Piece to place
  * @return 1 if the piece placed successfully, 0 if there's something in the way
  */
-int placePiece(game* game) {
-    // TODO: implement me
-    return 0;
+int placePiece(block* board, int boardWidth, int boardHeight, unplacedPiece* piece) {
+    // scan for blocks in the way
+    for (int y = 0; y < 4; y++) {
+        for (int x = 0; x < 4; x++) {
+            if (getBlockAt(board, boardWidth, boardHeight, x, y) != BLOCK_NONE) {
+                return 0;
+            }
+        }
+    }
+
+    // place blocks
+    block block = getBlockForShape(piece->basicShape); // TODO: implement this function
+    for (int y = 0; y < 4; y++) {
+        for (int x = 0; x < 4; x++) {
+            setBlockAt(board, boardWidth, boardHeight, x, y, block);
+        }
+    }
+
+    return 1;
 }
 
 /**
@@ -116,7 +141,12 @@ action tickGame(game* game) {
     game->forcedDropTimeoutTicks--;
 
     if (game->forcedDropTimeoutTicks == 0) {
-        int isPlaceOk = placePiece(game);
+        int isPlaceOk = placePiece(
+            game->placedBlocks,
+            game->ruleset->width,
+            game->ruleset->height,
+            game->hoveringPiece
+        );
         if (!isPlaceOk) {
             game->isGameOver = 1;
             return ACTION_GAME_OVER;
@@ -133,7 +163,12 @@ action tickGame(game* game) {
 
 action handleGameInput(game* game, input input) {
     if (input == INPUT_HARD_DROP) {
-        int isPlaceOk = placePiece(game);
+        int isPlaceOk = placePiece(
+            game->placedBlocks,
+            game->ruleset->width,
+            game->ruleset->height,
+            game->hoveringPiece
+        );
         if (!isPlaceOk) {
             return ACTION_NONE;
         }
