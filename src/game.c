@@ -13,7 +13,7 @@ game* newGame(ruleset* ruleset) {
     game->difficultChain = 0;
 
     game->forcedDropTimeoutTicks = ruleset->getDropTimeout(0);
-    game->placedBlocks = malloc(sizeof(block) * ruleset->height * ruleset->width);
+    game->placedBlocks = malloc(sizeof(block) * ruleset->height * ruleset->width); // TODO: this needs to be filled with BLOCK_NONE after init
     game->pieceQueue = newPieceQueue();
     game->hoveringPiece = popPieceQueue(game->pieceQueue);
 
