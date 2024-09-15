@@ -98,6 +98,20 @@ action updateGameStatistics(game* game, int clearedLines, action dropAction) {
     return action;
 }
 
+int isPieceOutOfBounds(unplacedPiece* piece, vec2 atLocation, int boardWidth, int boardHeight) {
+    for (int x = 0; x < 4; x++) {
+        for (int y = 0; y < 4; y++) {
+            if (xyHasBlock(piece, x + atLocation.x, y + atLocation.y)) {
+                if ((x < 0 || x >= boardWidth) || (y < 0 || y >= boardHeight)) {
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
 action tickGame(game* game) {
     game->forcedDropTimeoutTicks--;
 
@@ -149,14 +163,29 @@ action handleGameInput(game* game, input input) {
         return ACTION_NONE;
     }
 
+    if (input == INPUT_UP || input == INPUT_DOWN || input == INPUT_LEFT || input == INPUT_RIGHT) {
+        vec2 delta;
+        switch (input)
+        {
+            case INPUT_UP: delta = (vec2){x: 0, y: -1}; break;
+            case INPUT_DOWN: delta = (vec2){x: 0, y: 1}; break;
+            case INPUT_LEFT: delta = (vec2){x: -1, y: 0}; break;
+            case INPUT_RIGHT: delta = (vec2){x: 1, y: 0}; break;
+        }
 
-    if (input == INPUT_UP) {
-        vec2 delta = {x: 0, y: 1};
         vec2 destination = vec2Add(game->hoveringPiece->topLeftXY, delta);
-        // TODO: Check that, at the new destination, the piece isn't beyond the board boundaries
-        // probably using a helper function or something
+
+        int isOutOfBounds = isPieceOutOfBounds(
+            game->hoveringPiece,
+            destination,
+            game->ruleset->width,
+            game->ruleset->height
+        );
+        if (isOutOfBounds) {
+            return ACTION_NONE;
+        }
+
+        game->hoveringPiece->topLeftXY = destination;
         return ACTION_MOVE;
     }
-
-    // TODO: implement down, left, right
 }
